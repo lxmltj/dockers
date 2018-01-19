@@ -11,7 +11,7 @@ services:
     image: mariadb
     restart: always
     volumes:
-      - ./dockers/database:/var/lib/mysql
+      - ./database:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: password
   phpmyadmin:
@@ -27,7 +27,7 @@ services:
     image: lxmltj/drupal
     volumes :
       - ./server:/var/www/html
-      - ./dockers/log:/var/log/apache2/
+      - ./log:/var/log/apache2/
     links:
       - database:mysql
     environment:
