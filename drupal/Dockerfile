@@ -57,7 +57,7 @@ RUN php -r "readfile('http://files.drush.org/drush.phar');" > drush \
 
 # Add drupal console
 RUN curl https://drupalconsole.com/installer -L -o drupal.phar \
-	&& php -r "readfile('https://drupalconsole.com/installer');" > drupal.phar \
-	&& mv drupal.phar /usr/local/bin/drupal \
-	&& chmod +x /usr/local/bin/drupal \
-	&& drupal init --override
+    && php -r "readfile('https://drupalconsole.com/installer');" > drupal.phar \
+    && mv drupal.phar /usr/local/bin/drupal \
+    && chmod +x /usr/local/bin/drupal \
+    && drupal init --override
