@@ -1,7 +1,7 @@
 # based on https://hub.docker.com/_/drupal/
 # from https://www.drupal.org/requirements/php#drupalversions
 FROM php:7.1-apache
-MAINTAINER Ximing LU <ximing.lu@gmail.com>
+MAINTAINER Ximing LU <lxmltj@gmail.com>
 
 RUN a2enmod rewrite
 
