@@ -1,0 +1,34 @@
+version: '2'
+
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+  database:
+    image: mariadb
+    restart: always
+    volumes:
+      - ./dockers/database:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - database:db
+    ports:
+      - 8181:80
+    environment:
+      PMA_USER: root
+      PMA_PASSWORD: password
+  drupal:
+    image: lxmltj/drupal
+    volumes :
+      - ./server:/var/www/html
+      - ./dockers/log:/var/log/apache2/
+    links:
+      - database:mysql
+    environment:
+      - VIRTUAL_HOST=homename.local
