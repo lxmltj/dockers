@@ -51,6 +51,17 @@ RUN { \
 	} > /usr/local/etc/php/conf.d/custom-settings.ini
 
 # Install extra utils
+# Add eslint csslint bower grunt
+RUN  apt-get update && apt-get install -y nodejs npm
+# Symlinks node directory.
+RUN ln -s /usr/bin/nodejs /usr/bin/node
+# Installs node modules.
+RUN npm install -g \
+	  eslint \
+	  csslint \
+	  bower \
+	  grunt-cli
+
 # Add composer
 RUN curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer \
@@ -63,7 +74,11 @@ RUN php -r "readfile('http://files.drush.org/drush.phar');" > drush \
 
 # Add drupal console
 RUN curl https://drupalconsole.com/installer -L -o drupal.phar \
-    && php -r "readfile('https://drupalconsole.com/installer');" > drupal.phar \
-    && mv drupal.phar /usr/local/bin/drupal \
-    && chmod +x /usr/local/bin/drupal \
-    && drupal init --override
+	&& php -r "readfile('https://drupalconsole.com/installer');" > drupal.phar \
+	&& mv drupal.phar /usr/local/bin/drupal \
+	&& chmod +x /usr/local/bin/drupal \
+	&& drupal init --override
+
+# Clean Up
+RUN apt-get -y autoremove
+RUN apt-get -y clean
