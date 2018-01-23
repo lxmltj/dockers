@@ -37,6 +37,12 @@ RUN set -ex; \
 	\
 	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
 	rm -rf /var/lib/apt/lists/*
+	
+# Install extra utils
+# Add composer
+RUN curl -sS https://getcomposer.org/installer | php \
+    && mv composer.phar /usr/local/bin/composer \
+    && chmod a+x /usr/local/bin/composer
 
 # set recommended PHP.ini settings
 # see https://secure.php.net/manual/en/opcache.installation.php
