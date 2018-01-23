@@ -47,3 +47,9 @@ RUN { \
 		echo 'xdebug.max_nesting_level = 256'; \
 		echo 'memory_limit = 256M'; \
 	} > /usr/local/etc/php/conf.d/custom-settings.ini
+
+# Install extra utils
+# Add composer
+RUN curl -sS https://getcomposer.org/installer | php \
+    && mv composer.phar /usr/local/bin/composer \
+    && chmod a+x /usr/local/bin/composer
