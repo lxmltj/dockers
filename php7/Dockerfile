@@ -9,7 +9,7 @@ RUN  if [ [ -z "$APACHE_DOCUMENT_ROOT" ] && "$APACHE_DOCUMENT_ROOT" != "/var/www
 
 RUN a2enmod rewrite
 
-# install the PHP extensions we need
+# install the PHP extensions we need, From https://hub.docker.com/_/drupal/
 RUN set -ex \
 	&& buildDeps=' \
 		libjpeg62-turbo-dev \

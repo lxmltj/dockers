@@ -10,7 +10,7 @@ RUN  if [ [ -z "$APACHE_DOCUMENT_ROOT" ] && "$APACHE_DOCUMENT_ROOT" != "/var/www
 
 RUN a2enmod rewrite
 
-# install the PHP extensions we need
+# install the PHP extensions we need, From https://hub.docker.com/_/wordpress/
 RUN set -ex; \
 	\
 	savedAptMark="$(apt-mark showmanual)"; \
@@ -57,7 +57,7 @@ RUN { \
 		echo 'xdebug.max_nesting_level = 256'; \
 	} > /usr/local/etc/php/conf.d/custom.ini
 
-	
+
 # Install extra utils
 # Add composer
 RUN curl -sS https://getcomposer.org/installer | php \

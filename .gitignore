@@ -1,0 +1,10 @@
+# IDE settings
+.buildpath
+.externalToolBuilders/
+.project
+.settings/
+.idea
+
+# Excluding unwanted files
+.DS_Store
+*~
