@@ -2,7 +2,7 @@ FROM php:7.1-apache
 MAINTAINER Ximing LU <lxmltj@gmail.com>
 
 # Changing DocumentRoot
-RUN  if [ "$APACHE_DOCUMENT_ROOT" != "/var/www/html" ]; \
+RUN  if [ [ -z "$APACHE_DOCUMENT_ROOT" ] && "$APACHE_DOCUMENT_ROOT" != "/var/www/html" ]; \
      then sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf \
      && sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf; \
      fi
@@ -47,9 +47,3 @@ RUN { \
 		echo 'xdebug.max_nesting_level = 256'; \
 		echo 'memory_limit = 256M'; \
 	} > /usr/local/etc/php/conf.d/custom-settings.ini
-
-# Install extra utils
-# Add composer
-RUN curl -sS https://getcomposer.org/installer | php \
-    && mv composer.phar /usr/local/bin/composer \
-    && chmod a+x /usr/local/bin/composer
