@@ -37,12 +37,6 @@ RUN set -ex; \
 	\
 	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
 	rm -rf /var/lib/apt/lists/*
-	
-# Install extra utils
-# Add composer
-RUN curl -sS https://getcomposer.org/installer | php \
-    && mv composer.phar /usr/local/bin/composer \
-    && chmod a+x /usr/local/bin/composer
 
 # set recommended PHP.ini settings
 # see https://secure.php.net/manual/en/opcache.installation.php
@@ -62,3 +56,10 @@ RUN { \
 		echo 'post_max_size = 256M'; \
 		echo 'xdebug.max_nesting_level = 256'; \
 	} > /usr/local/etc/php/conf.d/custom.ini
+
+	
+# Install extra utils
+# Add composer
+RUN curl -sS https://getcomposer.org/installer | php \
+    && mv composer.phar /usr/local/bin/composer \
+    && chmod a+x /usr/local/bin/composer
