@@ -2,11 +2,6 @@ FROM lxmltj/php7
 MAINTAINER Ximing LU <lxmltj@gmail.com>
 
 # Install extra utils
-# Add composer
-RUN curl -sS https://getcomposer.org/installer | php \
-    && mv composer.phar /usr/local/bin/composer \
-    && chmod a+x /usr/local/bin/composer
-
 # Add drush
 RUN php -r "readfile('http://files.drush.org/drush.phar');" > drush \
     && chmod +x drush \
