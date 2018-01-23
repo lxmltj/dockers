@@ -1,12 +1,10 @@
 FROM php:5.6-apache
-
 MAINTAINER Ximing LU <lxmltj@gmail.com>
 
 # Changing DocumentRoot
-RUN  if [ "$APACHE_DOCUMENT_ROOT" != "/var/www/html" ]; \
-     then sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf \
-     && sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf; \
-     fi
+ENV APACHE_DOCUMENT_ROOT=/var/www/html
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf \
+    && sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf;
 
 RUN a2enmod rewrite
 
