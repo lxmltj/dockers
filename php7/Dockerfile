@@ -47,7 +47,7 @@ RUN { \
 		echo 'upload_max_filesize = 256M'; \
 		echo 'post_max_size = 256M'; \
 		echo 'xdebug.max_nesting_level = 256'; \
-		echo 'memory_limit = 256M'; \
+		echo 'memory_limit = 512M'; \
 	} > /usr/local/etc/php/conf.d/custom-settings.ini
 
 # Install extra utils
