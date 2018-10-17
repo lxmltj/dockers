@@ -16,6 +16,7 @@ RUN requirements="libpng-dev libxml2-dev libav-tools libpq-dev libmcrypt-dev lib
     && docker-php-ext-install pdo \
     && docker-php-ext-install pdo_pgsql \
     && docker-php-ext-install pdo_mysql \
+    && docker-php-ext-install mysqli \
     && docker-php-ext-install mbstring \
     && docker-php-ext-install zip \
     && docker-php-ext-install intl \
