@@ -59,6 +59,10 @@ RUN { \
 	} > /usr/local/etc/php/conf.d/custom.ini
 
 
+RUN apt-get update && apt-get install -y libmemcached11 libmemcachedutil2 build-essential libmemcached-dev libz-dev \
+    && pecl install memcached-2.2.0 \
+    && echo extension=memcached.so >> /usr/local/etc/php/conf.d/memcached.ini
+
 # Install extra utils
 # Add composer
 RUN curl -sS https://getcomposer.org/installer | php \
