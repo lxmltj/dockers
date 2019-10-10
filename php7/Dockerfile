@@ -9,7 +9,7 @@ RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-av
     && usermod -u 1000 www-data
 
 # install the PHP extensions we need, From https://hub.docker.com/_/drupal/
-RUN requirements="libpng-dev libxml2-dev libav-tools libpq-dev libmcrypt-dev libmcrypt4 libcurl3-dev libfreetype6 libjpeg62-turbo-dev libjpeg62-turbo-dev libfreetype6-dev libicu-dev libxslt1-dev" \
+RUN requirements="libpng-dev libxml2-dev libav-tools libpq-dev libmcrypt-dev libmcrypt4 libcurl3-dev libfreetype6 libjpeg62-turbo-dev libjpeg62-turbo-dev libfreetype6-dev libicu-dev libxslt1-dev mysql-client" \
     && apt-get update \
     && apt-get install -y $requirements \
     && docker-php-ext-install pcntl \
