@@ -3,9 +3,12 @@ MAINTAINER Ximing LU <lxmltj@gmail.com>
 
 # Install extra utils
 # Add drush
-RUN php -r "readfile('http://files.drush.org/drush.phar');" > drush \
-    && chmod +x drush \
-    && mv drush /usr/local/bin/
+# Set the Drush version.
+ENV DRUSH_VERSION 8.3.0
+
+# Install Drush 8 with the phar file.
+RUN curl -fsSL -o /usr/local/bin/drush "https://github.com/drush-ops/drush/releases/download/$DRUSH_VERSION/drush.phar" && \
+    chmod +x /usr/local/bin/drush
 
 # Add drupal console
 RUN curl https://drupalconsole.com/installer -L -o drupal.phar \
