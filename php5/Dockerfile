@@ -9,7 +9,8 @@ RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-av
     && a2enmod rewrite \
     && a2ensite default-ssl \
     && a2enmod ssl \
-    && usermod -u 1000 www-data
+    && usermod -u 1000 www-data \
+    && chown -R www-data:www-data /var/www
 
 # install the PHP extensions we need, From https://hub.docker.com/_/wordpress/
 RUN set -ex; \
@@ -58,7 +59,7 @@ RUN { \
 		echo 'xdebug.max_nesting_level = 256'; \
 	} > /usr/local/etc/php/conf.d/custom.ini
 
-
+# Add memcached
 RUN apt-get update && apt-get install -y libmemcached11 libmemcachedutil2 build-essential libmemcached-dev libz-dev \
     && pecl install memcached-2.2.0 \
     && echo extension=memcached.so >> /usr/local/etc/php/conf.d/memcached.ini
