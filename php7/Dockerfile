@@ -6,7 +6,8 @@ ENV APACHE_DOCUMENT_ROOT=/var/www/html
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf \
     && sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf \
     && a2enmod rewrite \
-    && usermod -u 1000 www-data
+    && usermod -u 1000 www-data \
+    && chown -R www-data:www-data /var/www
 
 # install the PHP extensions we need, From https://hub.docker.com/_/drupal/
 RUN requirements="libxml2-dev libpq-dev libmcrypt-dev libmcrypt4 libcurl3-dev libfreetype6 libjpeg62-turbo-dev libfreetype6-dev libpng-dev libzip-dev libicu-dev libxslt1-dev mariadb-client" \
