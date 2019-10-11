@@ -24,6 +24,10 @@ RUN requirements="libxml2-dev libpq-dev libmcrypt-dev libmcrypt4 libcurl3-dev li
     && docker-php-ext-install soap \
     && docker-php-ext-install bcmath \
     && docker-php-ext-install opcache \
+    && docker-php-ext-configure gd \
+		--with-freetype-dir=/usr \
+		--with-jpeg-dir=/usr \
+		--with-png-dir=/usr \
     && docker-php-ext-install gd
 
 RUN apt-get update && apt-get install -y git nano ssh
