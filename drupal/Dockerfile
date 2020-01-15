@@ -2,7 +2,7 @@ FROM lxmltj/php7
 MAINTAINER Ximing LU <lxmltj@gmail.com>
 
 # Install extra php ext
-RUN docker-php-ext-enable imagick
+RUN docker-php-ext-install imagick
 
 # Install extra utils
 # Add drush
